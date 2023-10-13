@@ -1,28 +1,30 @@
-# Probability of getting 6 on the first die
-p_first_die_6 = 1/2
-# Probability of getting 1 on the first die
-p_first_die_1 = 1/10
+#Code by G V V Sharma
+#October 13, 2023
 
-# Probability of getting 1 on the second die
-p_second_die_1 = 2/5
+#Generating binomial r.v.
+#Release under GNU/GPL
 
-# Probability of not getting 1 on the second die
-p_second_die_not_1 = 1 - p_second_die_1
+import numpy as np
 
-# Calculate probabilities for different outcomes
-# Number of ones seen can be 0, 1, or 2
+from scipy.stats import bernoulli
 
-# Probability of getting 0 ones
-p_zero_ones = (1 - p_first_die_1) * p_second_die_not_1
+p1 = 1/10
+p2 = 2/5
+X1 = bernoulli.rvs(p1, size=1000)
+X2 = bernoulli.rvs(p2, size=1000)
+X = X1+X2
+count0=0
+count1=0
+count2=0
+for i in range(1000):
+    if X[i] == 0:
+        count0 = count0+1
+    if X[i] == 1:
+        count1 = count1+1
+    if X[i] == 2:
+        count2 = count2+1
 
-# Probability of getting 1 one
-p_one_ones = p_first_die_1 * p_second_die_not_1 + p_second_die_1 * (1 - p_first_die_1)
-
-# Probability of getting 2 ones
-p_two_ones = p_first_die_1 * p_second_die_1
-
-# Print the probability distribution
-print("Probability of 0 ones:", p_zero_ones)
-print("Probability of 1 one:", p_one_ones)
-print("Probability of 2 ones:", p_two_ones)
-
+print(count0/1000,27/50,count1/1000,21/50,count2/1000,2/50)
+#print(X[i])
+#print(X1, '\n', X2)
+#print(X)
